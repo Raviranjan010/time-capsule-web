@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Capsule - Lock Your Memories</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle" title="Toggle Theme">
+        <span id="themeIcon">🌙</span>
+    </div>
+
+    <div class="container">
+        <div class="card">
+
+            <!-- Header -->
+            <div class="card-header">
+                <div class="lock-icon" id="lockIcon">🔒</div>
+                <h1 class="card-title">Time Capsule</h1>
+                <p class="card-subtitle">Lock your message until the future arrives</p>
+            </div>
+
+            <!-- Form -->
+            <div class="form-section" id="formSection">
+                <div class="form-group">
+                    <label>Your Secret Message</label>
+                    <textarea id="message" placeholder="Write your message to the future..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Unlock Date & Time</label>
+                    <input type="datetime-local" id="unlockTime">
+                </div>
+
+                <button class="btn" id="lockBtn">🔒 Lock Message</button>
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+
+            <!-- Countdown -->
+            <div class="countdown-section" id="countdownSection">
+                <p class="countdown-message">Your message is locked and waiting...</p>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <div class="countdown-timer">
+                    <div class="time-unit"><span id="days">00</span><small>Days</small></div>
+                    <div class="time-unit"><span id="hours">00</span><small>Hours</small></div>
+                    <div class="time-unit"><span id="minutes">00</span><small>Minutes</small></div>
+                    <div class="time-unit"><span id="seconds">00</span><small>Seconds</small></div>
+                </div>
+
+                <button class="btn btn-secondary" id="cancelBtn">Cancel & Reset</button>
+            </div>
+
+            <!-- Unlocked -->
+            <div class="unlocked-section" id="unlockedSection">
+                <div class="unlock-icon">🔓</div>
+                <h2>Your Message is Unlocked!</h2>
+
+                <div class="message-display">
+                    <p id="displayMessage"></p>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-secondary" id="copyBtn">📋 Copy</button>
+                    <button class="btn" id="resetBtn">🔄 New Capsule</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
