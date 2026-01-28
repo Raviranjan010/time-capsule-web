@@ -7,71 +7,211 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
 
     <!-- Theme Toggle -->
     <div class="theme-toggle" id="themeToggle" title="Toggle Theme">
         <span id="themeIcon">🌙</span>
     </div>
 
+    <!-- Sound Toggle -->
+    <div class="sound-toggle" id="soundToggle" title="Toggle Sound">
+        <span id="soundIcon">🔊</span>
+    </div>
+
     <div class="container">
         <div class="card">
-
             <!-- Header -->
             <div class="card-header">
-                <div class="lock-icon" id="lockIcon">🔒</div>
+                <div class="lock-icon" id="lockIcon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="5" y="11" width="14" height="10" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                </div>
                 <h1 class="card-title">Time Capsule</h1>
-                <p class="card-subtitle">Lock your message until the future arrives</p>
+                <p class="card-subtitle">Lock your memories until the perfect moment</p>
             </div>
 
-            <!-- Form -->
+            <!-- Form Section -->
             <div class="form-section" id="formSection">
                 <div class="form-group">
-                    <label>Your Secret Message</label>
-                    <textarea id="message" placeholder="Write your message to the future..."></textarea>
+                    <label for="message">
+                        <span class="label-icon">✍️</span>
+                        Your Secret Message
+                    </label>
+                    <textarea 
+                        id="message" 
+                        placeholder="Write your message to the future... Share your dreams, hopes, or memories."
+                        maxlength="1000"
+                    ></textarea>
+                    <div class="char-counter">
+                        <span id="charCount">0</span>/1000 characters
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Unlock Date & Time</label>
+                    <label for="unlockTime">
+                        <span class="label-icon">⏰</span>
+                        Unlock Date & Time
+                    </label>
                     <input type="datetime-local" id="unlockTime">
+                    <div class="quick-time-buttons">
+                        <button type="button" class="quick-btn" data-hours="1">+1 Hour</button>
+                        <button type="button" class="quick-btn" data-hours="24">+1 Day</button>
+                        <button type="button" class="quick-btn" data-hours="168">+1 Week</button>
+                        <button type="button" class="quick-btn" data-hours="720">+1 Month</button>
+                    </div>
                 </div>
 
-                <button class="btn" id="lockBtn">🔒 Lock Message</button>
+                <div class="form-group">
+                    <label for="capsuleTitle">
+                        <span class="label-icon">🏷️</span>
+                        Capsule Title (Optional)
+                    </label>
+                    <input type="text" id="capsuleTitle" placeholder="Give your capsule a name...">
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <span class="label-icon">🎨</span>
+                        Choose a Theme Color
+                    </label>
+                    <div class="color-picker">
+                        <button type="button" class="color-btn" data-color="purple" style="background: linear-gradient(135deg, #667eea, #764ba2)"></button>
+                        <button type="button" class="color-btn" data-color="blue" style="background: linear-gradient(135deg, #4facfe, #00f2fe)"></button>
+                        <button type="button" class="color-btn" data-color="pink" style="background: linear-gradient(135deg, #f093fb, #f5576c)"></button>
+                        <button type="button" class="color-btn" data-color="green" style="background: linear-gradient(135deg, #43e97b, #38f9d7)"></button>
+                        <button type="button" class="color-btn active" data-color="orange" style="background: linear-gradient(135deg, #fa709a, #fee140)"></button>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" id="lockBtn">
+                    <span class="btn-icon">🔒</span>
+                    Lock Message
+                    <span class="btn-shimmer"></span>
+                </button>
                 <div class="error-message" id="errorMessage"></div>
             </div>
 
-            <!-- Countdown -->
+            <!-- Countdown Section -->
             <div class="countdown-section" id="countdownSection">
-                <p class="countdown-message">Your message is locked and waiting...</p>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
+                <div class="capsule-title-display" id="capsuleTitleDisplay"></div>
+                <p class="countdown-message">Your message is safely locked...</p>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <div class="progress-glow"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="progressPercent">0%</span> Complete
+                    </div>
                 </div>
 
                 <div class="countdown-timer">
-                    <div class="time-unit"><span id="days">00</span><small>Days</small></div>
-                    <div class="time-unit"><span id="hours">00</span><small>Hours</small></div>
-                    <div class="time-unit"><span id="minutes">00</span><small>Minutes</small></div>
-                    <div class="time-unit"><span id="seconds">00</span><small>Seconds</small></div>
+                    <div class="time-unit">
+                        <div class="time-card">
+                            <span class="time-value" id="days">00</span>
+                        </div>
+                        <small>Days</small>
+                    </div>
+                    <div class="time-separator">:</div>
+                    <div class="time-unit">
+                        <div class="time-card">
+                            <span class="time-value" id="hours">00</span>
+                        </div>
+                        <small>Hours</small>
+                    </div>
+                    <div class="time-separator">:</div>
+                    <div class="time-unit">
+                        <div class="time-card">
+                            <span class="time-value" id="minutes">00</span>
+                        </div>
+                        <small>Minutes</small>
+                    </div>
+                    <div class="time-separator">:</div>
+                    <div class="time-unit">
+                        <div class="time-card">
+                            <span class="time-value" id="seconds">00</span>
+                        </div>
+                        <small>Seconds</small>
+                    </div>
                 </div>
 
-                <button class="btn btn-secondary" id="cancelBtn">Cancel & Reset</button>
+                <div class="unlock-info">
+                    <div class="info-item">
+                        <span class="info-icon">📅</span>
+                        <div>
+                            <small>Unlocks on</small>
+                            <p id="unlockDate"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" id="cancelBtn">
+                    <span class="btn-icon">↩️</span>
+                    Cancel & Reset
+                </button>
             </div>
 
-            <!-- Unlocked -->
+            <!-- Unlocked Section -->
             <div class="unlocked-section" id="unlockedSection">
-                <div class="unlock-icon">🔓</div>
-                <h2>Your Message is Unlocked!</h2>
-
+                <div class="unlock-animation">
+                    <div class="unlock-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="11" width="14" height="10" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                        </svg>
+                    </div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                    <div class="confetti"></div>
+                </div>
+                
+                <h2 class="unlock-title">Your Message is Unlocked! 🎉</h2>
+                <div class="capsule-title-unlocked" id="capsuleTitleUnlocked"></div>
+                
                 <div class="message-display">
-                    <p id="displayMessage"></p>
+                    <div class="message-content">
+                        <p id="displayMessage"></p>
+                    </div>
+                    <div class="message-meta">
+                        <span class="meta-item">
+                            <span class="meta-icon">📝</span>
+                            Locked on: <span id="lockedDate"></span>
+                        </span>
+                        <span class="meta-item">
+                            <span class="meta-icon">🔓</span>
+                            Unlocked on: <span id="unlockedDate"></span>
+                        </span>
+                    </div>
                 </div>
 
                 <div class="button-group">
-                    <button class="btn btn-secondary" id="copyBtn">📋 Copy</button>
-                    <button class="btn" id="resetBtn">🔄 New Capsule</button>
+                    <button class="btn btn-secondary" id="copyBtn">
+                        <span class="btn-icon">📋</span>
+                        Copy Message
+                    </button>
+                    <button class="btn btn-secondary" id="shareBtn">
+                        <span class="btn-icon">📤</span>
+                        Share
+                    </button>
+                    <button class="btn btn-primary" id="resetBtn">
+                        <span class="btn-icon">🔄</span>
+                        New Capsule
+                    </button>
                 </div>
             </div>
-
         </div>
     </div>
 
