@@ -8,7 +8,8 @@
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         }
-        
+
+
         class Star {
             constructor() {
                 this.x = Math.random() * width;
